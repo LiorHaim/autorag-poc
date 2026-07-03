@@ -1,0 +1,102 @@
+[
+  {
+    "question": "How many PTO days does a new employee get per year?",
+    "correct_answers": ["20 days per year", "New employees with 0-2 years tenure receive 20 days per year, accrued at 1.67 days per month"],
+    "correct_answer_document_ids": ["pto-policy.md"]
+  },
+  {
+    "question": "What is the maximum number of PTO days that can be carried over to the next year?",
+    "correct_answers": ["5 days", "Employees may carry over a maximum of 5 unused PTO days into the following calendar year"],
+    "correct_answer_document_ids": ["pto-policy.md"]
+  },
+  {
+    "question": "What are the minimum password requirements for NovaTech systems?",
+    "correct_answers": ["Minimum 14 characters, must include uppercase, lowercase, numbers, and special characters, cannot reuse the last 12 passwords, must be changed every 90 days, MFA is mandatory"],
+    "correct_answer_document_ids": ["it-security-policy.md"]
+  },
+  {
+    "question": "How much parental leave does a birth parent receive?",
+    "correct_answers": ["16 weeks of fully paid leave", "Birth parents receive 16 weeks of fully paid leave"],
+    "correct_answer_document_ids": ["parental-leave-policy.md"]
+  },
+  {
+    "question": "What is the maximum hotel rate for business travel in New York City?",
+    "correct_answers": ["$400 per night", "Up to $400/night in high-cost cities including NYC"],
+    "correct_answer_document_ids": ["travel-policy.md", "expense-policy.md"]
+  },
+  {
+    "question": "What is NovaTech's 401k matching policy?",
+    "correct_answers": ["NovaTech matches 100% of the first 4% of salary contributed", "100% match on the first 4% with 3-year cliff vesting for employer match"],
+    "correct_answer_document_ids": ["benefits-overview.md"]
+  },
+  {
+    "question": "How many approvals are required for code reviews?",
+    "correct_answers": ["Minimum 2 approvals required for production code, with at least 1 reviewer being a senior engineer or above"],
+    "correct_answer_document_ids": ["engineering-standards.md"]
+  },
+  {
+    "question": "What is the severance package for employees laid off due to restructuring?",
+    "correct_answers": ["3 weeks pay per year of service plus 3 months COBRA coverage"],
+    "correct_answer_document_ids": ["termination-offboarding.md"]
+  },
+  {
+    "question": "How much is the annual learning budget per employee?",
+    "correct_answers": ["$3,000 per year", "Every full-time employee receives a $3,000 annual learning budget"],
+    "correct_answer_document_ids": ["learning-development.md"]
+  },
+  {
+    "question": "What are the core collaboration hours when all team members should be available?",
+    "correct_answers": ["10:00 AM to 3:00 PM", "Core collaboration hours are 10:00 AM to 3:00 PM"],
+    "correct_answer_document_ids": ["employee-handbook.md", "remote-work-policy.md"]
+  },
+  {
+    "question": "What is the response time SLA for a critical security incident?",
+    "correct_answers": ["15 minutes", "Critical incidents require response within 15 minutes"],
+    "correct_answer_document_ids": ["it-security-policy.md"]
+  },
+  {
+    "question": "How long is the probationary period for new employees?",
+    "correct_answers": ["90 days", "All new employees undergo a 90-day probationary period with reviews at 30, 60, and 90 days"],
+    "correct_answer_document_ids": ["employee-handbook.md"]
+  },
+  {
+    "question": "What percentage of employee health insurance premiums does NovaTech cover?",
+    "correct_answers": ["80% of employee premiums and 50% of dependent premiums"],
+    "correct_answer_document_ids": ["benefits-overview.md"]
+  },
+  {
+    "question": "What is the compensation adjustment for an employee with a performance rating of 4 (Exceeds Expectations)?",
+    "correct_answers": ["5-8% merit increase plus bonus eligibility"],
+    "correct_answer_document_ids": ["performance-review-process.md"]
+  },
+  {
+    "question": "How long is customer data retained after account closure?",
+    "correct_answers": ["90 days", "Churned customer data is deleted within 90 days of account closure"],
+    "correct_answer_document_ids": ["data-privacy-policy.md"]
+  },
+  {
+    "question": "What is the monthly remote work stipend for internet and utilities?",
+    "correct_answers": ["$75 per month", "Employees working remotely receive a monthly stipend of $75"],
+    "correct_answer_document_ids": ["remote-work-policy.md"]
+  },
+  {
+    "question": "What is the maximum value of gifts employees can accept without disclosure?",
+    "correct_answers": ["$100", "Employees may accept gifts valued under $100. Gifts over $100 must be disclosed to HR"],
+    "correct_answer_document_ids": ["code-of-conduct.md"]
+  },
+  {
+    "question": "What is the notice period required for voluntary resignation for a director?",
+    "correct_answers": ["4 weeks", "4 weeks for directors and above"],
+    "correct_answer_document_ids": ["termination-offboarding.md"]
+  },
+  {
+    "question": "What are the two designated anchor days for in-office work?",
+    "correct_answers": ["Tuesday and Thursday", "Tuesday and Thursday are designated anchor days when teams are expected in-office"],
+    "correct_answer_document_ids": ["remote-work-policy.md"]
+  },
+  {
+    "question": "What is NovaTech's target market percentile for compensation?",
+    "correct_answers": ["75th percentile", "NovaTech targets the 75th percentile of market compensation for all roles"],
+    "correct_answer_document_ids": ["compensation-philosophy.md"]
+  }
+]

@@ -153,7 +153,9 @@ Build a pipeline that keeps the knowledge base current:
 
 ---
 
-## Model Upgrade Recommendation
+## Model Upgrade Recommendations
+
+### Foundation Model (LLM)
 
 For production, consider upgrading from the POC's 3B model:
 
@@ -165,7 +167,24 @@ For production, consider upgrading from the POC's 3B model:
 
 A larger model improves both answer quality AND evaluation reliability (since the same model acts as the LLM-as-judge).
 
-After upgrading the model, re-run AutoRAG to validate that the same chunking/retrieval parameters remain optimal with the new model.
+### Embedding Model
+
+The POC used `nomic-embed-text-v1.5` (auto-discovered by the sentence-transformers provider). For production, consider purpose-built models validated by Red Hat:
+
+| Model | Params | Embedding Dim | Context Length | Best for |
+|-------|--------|---------------|----------------|----------|
+| nomic-embed-text-v1.5 (POC) | 137M | 768 | 8192 | General purpose, good baseline |
+| BAAI/bge-m3 | 568M | 1024 | 8192 | Multilingual (100+ languages), dense + sparse retrieval. Red Hat recommended. |
+| RedHatAI/granite-embedding-english-r2 | 149M | 768 | 8192 | Enterprise-optimized, best MTEB scores in its class, Apache 2.0 |
+| RedHatAI/granite-embedding-small-english-r2 | 47M | 384 | 8192 | Lightweight, fastest throughput, ideal for high-volume production |
+
+**Recommendation**: For English-only production workloads, `RedHatAI/granite-embedding-english-r2` gives the best accuracy-to-size ratio. For multilingual needs, `BAAI/bge-m3` is the Red Hat documented recommendation.
+
+**Important**: Changing the embedding model requires re-indexing the entire document corpus (different dimensions = incompatible vectors). Re-run AutoRAG after changing the embedding model to validate the full configuration still holds.
+
+### After any model upgrade
+
+Re-run AutoRAG with the new model(s) to validate that the chunking/retrieval parameters remain optimal. A larger foundation model may perform better with different chunk sizes or retrieval counts.
 
 ---
 

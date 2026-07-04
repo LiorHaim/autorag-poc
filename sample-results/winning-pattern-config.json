@@ -1,0 +1,53 @@
+{
+  "name": "Pattern4",
+  "iteration": 3,
+  "max_combinations": 8,
+  "duration_seconds": 12.4,
+  "settings": {
+    "vector_store": {
+      "datasource_type": "ls_milvus"
+    },
+    "chunking": {
+      "method": "recursive",
+      "chunk_size": 2048,
+      "chunk_overlap": 128
+    },
+    "embedding": {
+      "model_id": "sentence-transformers/nomic-ai/nomic-embed-text-v1.5",
+      "distance_metric": "cosine",
+      "embedding_params": {
+        "embedding_dimension": 768,
+        "context_length": 8129
+      }
+    },
+    "retrieval": {
+      "method": "simple",
+      "number_of_chunks": 10,
+      "search_mode": "hybrid",
+      "ranker_strategy": "rrf",
+      "ranker_k": 60,
+      "ranker_alpha": 1
+    },
+    "generation": {
+      "model_id": "vllm-inference-1/llama-32-3b-instruct"
+    }
+  },
+  "scores": {
+    "answer_correctness": {
+      "mean": 0.8366,
+      "ci_low": 0.6733,
+      "ci_high": 0.9106
+    },
+    "faithfulness": {
+      "mean": 0.8435,
+      "ci_low": 0.7615,
+      "ci_high": 0.8889
+    },
+    "context_correctness": {
+      "mean": 0.9062,
+      "ci_low": 0.7562,
+      "ci_high": 0.975
+    }
+  },
+  "final_score": 0.8435
+}

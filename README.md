@@ -89,17 +89,20 @@ All issues above are resolved in RHOAI 3.5.
 
 ## POC Results (Sample)
 
-From a successful run with 5 patterns optimizing for faithfulness:
+Full results from a successful 8-pattern run are in [`sample-results/`](sample-results/) — including an interactive HTML leaderboard you can open in your browser.
 
 | Rank | Pattern | Faithfulness | Correctness | Context | Config |
 |------|---------|-------------|-------------|---------|--------|
-| 1 | Pattern4 | **0.835** | 0.805 | 0.906 | chunk:2048, overlap:128, 10 chunks, hybrid/RRF, nomic-embed |
-| 2 | Pattern3 | 0.821 | 0.873 | 0.910 | chunk:2048, overlap:128, 5 chunks, hybrid/RRF, nomic-embed |
-| 3 | Pattern5 | 0.802 | 0.836 | 0.900 | chunk:2048, overlap:128, 3 chunks, hybrid/RRF, nomic-embed |
-| 4 | Pattern2 | 0.793 | 0.848 | 0.888 | chunk:1024, overlap:128, 10 chunks, vector, granite-125m |
-| 5 | Pattern1 | 0.792 | 0.849 | 0.935 | chunk:1024, overlap:256, 5 chunks, hybrid/weighted, nomic-embed |
+| 1 | **Pattern4** | **0.844** | 0.837 | 0.906 | chunk:2048, overlap:128, 10 chunks, hybrid/RRF, nomic-embed |
+| 2 | Pattern3 | 0.817 | 0.842 | 0.913 | chunk:2048, overlap:128, 5 chunks, hybrid/RRF, nomic-embed |
+| 3 | Pattern2 | 0.811 | 0.896 | 0.888 | chunk:1024, overlap:128, 10 chunks, vector, granite-125m |
+| 4 | Pattern5 | 0.801 | 0.805 | 0.900 | chunk:2048, overlap:128, 3 chunks, hybrid/RRF, nomic-embed |
+| ... | ... | ... | ... | ... | (see full leaderboard in sample-results/) |
 
-Key findings: Larger chunks (2048) + hybrid search + RRF ranking consistently outperformed smaller chunks with pure vector search.
+**Key findings:**
+- Larger chunks (2048) + hybrid search + RRF ranking consistently outperformed smaller chunks with pure vector search
+- Retrieving more chunks (10) improved faithfulness by giving the LLM more context for grounding
+- nomic-embed-text-v1.5 slightly outperformed granite-embedding-125m
 
 ## License
 

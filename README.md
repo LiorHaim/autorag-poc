@@ -1,6 +1,6 @@
 # AutoRAG POC - Red Hat OpenShift AI
 
-Sample documents, test data, and implementation guide for running an AutoRAG optimization on Red Hat OpenShift AI (RHOAI 3.4+).
+Sample documents, test data, and implementation guide for running an AutoRAG optimization on Red Hat OpenShift AI (RHOAI 3.4). Things may differ in RHOAI 3.5 (e.g., Llama Stack renamed to OGX, pipeline import bug fixed, dashboard rendering fixed).
 
 ## What's Included
 
@@ -50,7 +50,7 @@ Complete step-by-step implementation guide covering all 9 phases from zero to a 
 
 ## Prerequisites
 
-- OpenShift 4.20+ with RHOAI 3.4 operator installed
+- OpenShift 4.20+ with RHOAI 3.4 operator installed (this guide is specific to 3.4)
 - GPU node(s) for vLLM model serving
 - Llama Stack / OGX instance with:
   - At least 1 foundation model (LLM) — used for both generation AND evaluation (LLM-as-judge)

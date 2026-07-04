@@ -1,6 +1,6 @@
 # AutoRAG POC Cheat Sheet
 
-**Red Hat OpenShift AI 3.4+** — Complete implementation guide from zero to running optimization.
+**Red Hat OpenShift AI 3.4** — Complete implementation guide from zero to running optimization. This guide is specific to RHOAI 3.4. In RHOAI 3.5, Llama Stack is renamed to OGX, the pipeline import workaround is no longer needed, and the dashboard rendering bug is fixed.
 
 > This guide assumes a fresh OpenShift 4.20+ cluster with RHOAI 3.4 operator installed, GPU nodes available, and cluster-admin access. Follow each phase in order.
 
@@ -429,4 +429,4 @@ From the best pattern's actions menu, download two notebooks:
 
 ---
 
-*Based on Red Hat OpenShift AI 3.4 documentation and hands-on validation. AutoRAG is a Technology Preview feature — not for production use without GA release alignment. The pipeline import workaround (RHOAIENG-64768) is fixed in RHOAI 3.5.*
+*Based on Red Hat OpenShift AI 3.4 documentation and hands-on validation. AutoRAG is a Technology Preview feature — not for production use without GA release alignment. Several issues documented here (pipeline import, dashboard rendering, operator resource defaults) are fixed in RHOAI 3.5.*

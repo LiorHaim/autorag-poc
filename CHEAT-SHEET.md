@@ -316,12 +316,52 @@ From the best pattern's actions menu, download two notebooks:
 | Indexing notebook | Code to chunk docs, embed them, store in Milvus with the winning config | Only if adding MORE documents (vector DB is already populated from the run) |
 | Inference notebook | Code to query the RAG system — retrieves chunks + generates grounded answer | Immediately — this is your 'try it now' tool |
 
-**How to use:**
+> If the dashboard results page shows "Failed to list templates optimization directory" (known TP bug in 3.4, fixed in 3.5), download artifacts directly from S3:
+> ```bash
+> oc exec <minio-pod> -n <ns> -- mc cp --recursive local/pipelines/documents-rag-optimization-pipeline/<run-id>/rag-templates-optimization/<artifact-id>/rag_patterns/Pattern4/ /tmp/Pattern4/
+> oc exec <minio-pod> -n <ns> -- cat /tmp/Pattern4/inference.ipynb > ~/Desktop/inference.ipynb
+> oc exec <minio-pod> -n <ns> -- cat /tmp/Pattern4/indexing.ipynb > ~/Desktop/indexing.ipynb
+> ```
+> Also download the leaderboard HTML:
+> ```bash
+> oc exec <minio-pod> -n <ns> -- mc cat local/pipelines/documents-rag-optimization-pipeline/<run-id>/leaderboard-evaluation/<artifact-id>/html_artifact > ~/Desktop/leaderboard.html
+> ```
 
-1. Create a Workbench in your RHOAI project (Jupyter environment)
-2. Attach your S3 connection + Llama Stack connection to the workbench
-3. Upload the inference notebook
-4. Run each cell — it prompts you to enter a question and returns a RAG-grounded answer
+### 9.3 Testing the winning pattern in a Workbench
+
+**Create a Workbench:**
+
+1. RHOAI Dashboard → Data Science Projects → your project → Workbenches → Create workbench
+2. Configure:
+
+| Setting | Value |
+|---------|-------|
+| Name | autorag-test |
+| Image | Jupyter \| Data Science \| CPU \| Python 3.12 |
+| Size | Small (CPU only — inference is handled remotely by Llama Stack/vLLM) |
+| Cluster storage | Default (20Gi) |
+| Connections | Attach: **Llama Stack Connection** + **minio-https** (S3) |
+
+3. Wait for the workbench pod to reach Running status
+
+**Run the inference notebook:**
+
+1. Click the workbench link to open JupyterLab
+2. Upload `inference.ipynb` (the Pattern4 inference notebook)
+3. Run all cells in order
+4. When prompted, enter a test question — the notebook will:
+   - Embed your question using the winning embedding model
+   - Search Milvus for the most relevant document chunks
+   - Send chunks + question to the LLM via Llama Stack
+   - Return a grounded answer
+
+**Example test questions:**
+- "How many PTO days does a new employee get?"
+- "What is the minimum password length?"
+- "How much parental leave does a birth parent receive?"
+- "What is the severance package for a layoff?"
+
+> The vector database is already populated from the optimization run. You do NOT need to run the indexing notebook first unless you want to add new documents.
 
 > These notebooks are the RECIPE — the proven-best config as runnable code. To productionize, extract the parameters and build your own application/service around them.
 

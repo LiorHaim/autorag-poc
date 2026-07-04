@@ -348,7 +348,14 @@ From the best pattern's actions menu, download two notebooks:
 
 1. Click the workbench link to open JupyterLab
 2. Upload `inference.ipynb` (the Pattern4 inference notebook)
-3. Run all cells in order
+3. Run all cells in order. When prompted for connection details, use:
+
+| Prompt | Value |
+|--------|-------|
+| Llama Stack base URL | http://lsd-genai-playground-service.\<ns\>.svc.cluster.local:8321 |
+| Llama Stack API key | fake |
+| Milvus endpoint (if asked) | http://milvus.\<ns\>.svc.cluster.local:19530 |
+
 4. When prompted, enter a test question — the notebook will:
    - Embed your question using the winning embedding model
    - Search Milvus for the most relevant document chunks

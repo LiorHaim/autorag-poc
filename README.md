@@ -1,6 +1,6 @@
 # AutoRAG POC - Red Hat OpenShift AI
 
-Sample documents and test data for running an AutoRAG optimization run on Red Hat OpenShift AI (RHOAI 3.4+).
+Sample documents, test data, and implementation guide for running an AutoRAG optimization on Red Hat OpenShift AI (RHOAI 3.4+).
 
 ## What's Included
 
@@ -26,25 +26,81 @@ Sample documents and test data for running an AutoRAG optimization run on Red Ha
 }
 ```
 
+### Cheat Sheet (`CHEAT-SHEET.md`)
+
+Complete step-by-step implementation guide covering all 9 phases from zero to a working AutoRAG optimization — including every gotcha, workaround, and configuration detail discovered during hands-on validation.
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  RHOAI Dashboard → AutoRAG Wizard                            │
+├─────────────────────────────────────────────────────────────┤
+│  Data Science Pipelines (KFP v2 + Argo Workflows)           │
+├─────────────────────────────────────────────────────────────┤
+│  Llama Stack / OGX (port 8321)                               │
+│  ├── /v1/chat/completions → vLLM (GPU)                      │
+│  ├── /v1/embeddings → sentence-transformers (CPU, inline)    │
+│  ├── /v1/vector_stores → Remote Milvus (:19530)             │
+│  └── scoring → inline::llm-as-judge                          │
+├─────────────────────────────────────────────────────────────┤
+│  MinIO (S3) │ Milvus (vectors) │ MariaDB (metadata)         │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ## Prerequisites
 
-- RHOAI 3.4+ with OpenShift AI operator installed
+- OpenShift 4.20+ with RHOAI 3.4 operator installed
+- GPU node(s) for vLLM model serving
 - Llama Stack / OGX instance with:
-  - At least 1 foundation model (LLM) for generation + judging
-  - At least 1 embedding model for vectorization
-- Remote Milvus vector database registered with Llama Stack
-- Data Science Pipelines server configured
-- S3-compatible storage (MinIO or equivalent)
+  - At least 1 foundation model (LLM) — used for both generation AND evaluation (LLM-as-judge)
+  - At least 1 embedding model — runs inline via sentence-transformers (no GPU needed)
+- Remote Milvus vector database (inline Milvus is NOT supported)
+- Data Science Pipelines server (DSPA) configured with S3 storage
+- S3-compatible storage with HTTPS route (MinIO or equivalent)
 
-## Usage
+## Quick Start
 
-1. Upload all files from `documents/` to your S3 bucket (single folder)
-2. Upload `test_data.json` when creating the AutoRAG optimization run
-3. Configure the run in the RHOAI dashboard under AutoRAG
+1. Upload all files from `documents/` to a **single folder** in your S3 bucket
+2. Import the [fixed pipeline YAML](https://github.com/red-hat-data-services/pipelines-components/blob/rhoai-3.4-fixed/pipelines/training/autorag/documents_rag_optimization_pipeline/pipeline.yaml) (required for RHOAI 3.4 — see RHOAIENG-64768)
+3. Create an AutoRAG optimization run in the RHOAI dashboard, uploading `test_data.json` as the evaluation dataset
+4. Review the leaderboard and download the winning pattern's inference notebook
+5. Test in a Workbench (Jupyter | Data Science | CPU | Python 3.12) with Llama Stack + S3 connections attached
+
+See **[CHEAT-SHEET.md](CHEAT-SHEET.md)** for the full detailed walkthrough.
 
 ## Model Recommendations
 
-| Role | Minimum (POC) | Recommended |
-|------|---------------|-------------|
-| Foundation (LLM) | Llama 3.2 3B | Llama 3.1 8B or 70B |
-| Embedding | granite-embedding-125m | BAAI/bge-m3 |
+| Role | Minimum (POC) | Recommended | Notes |
+|------|---------------|-------------|-------|
+| Foundation (LLM) | Llama 3.2 3B | Llama 3.1 8B+ | Larger model = better generation AND evaluation quality |
+| Embedding | granite-embedding-125m-english | BAAI/bge-m3 | Must include `context_length` in metadata |
+
+## Known Issues (RHOAI 3.4)
+
+| Issue | Impact | Workaround |
+|-------|--------|------------|
+| RHOAIENG-64768: Pipeline image pull errors | Run fails immediately | Import fixed pipeline YAML from `rhoai-3.4-fixed` branch |
+| Dashboard "Failed to list templates optimization directory" | Can't view results in UI | Download artifacts from S3 directly (see cheat sheet) |
+| Llama Stack operator reverts resource changes | Embedding timeouts | Scale down operator before editing deployment |
+| Default pod resources too low (250m CPU) | All patterns timeout | Increase to 2+ CPU, 4Gi memory, LLS_WORKERS=4 |
+
+All issues above are resolved in RHOAI 3.5.
+
+## POC Results (Sample)
+
+From a successful run with 5 patterns optimizing for faithfulness:
+
+| Rank | Pattern | Faithfulness | Correctness | Context | Config |
+|------|---------|-------------|-------------|---------|--------|
+| 1 | Pattern4 | **0.835** | 0.805 | 0.906 | chunk:2048, overlap:128, 10 chunks, hybrid/RRF, nomic-embed |
+| 2 | Pattern3 | 0.821 | 0.873 | 0.910 | chunk:2048, overlap:128, 5 chunks, hybrid/RRF, nomic-embed |
+| 3 | Pattern5 | 0.802 | 0.836 | 0.900 | chunk:2048, overlap:128, 3 chunks, hybrid/RRF, nomic-embed |
+| 4 | Pattern2 | 0.793 | 0.848 | 0.888 | chunk:1024, overlap:128, 10 chunks, vector, granite-125m |
+| 5 | Pattern1 | 0.792 | 0.849 | 0.935 | chunk:1024, overlap:256, 5 chunks, hybrid/weighted, nomic-embed |
+
+Key findings: Larger chunks (2048) + hybrid search + RRF ranking consistently outperformed smaller chunks with pure vector search.
+
+## License
+
+Sample documents are fictional and provided for testing purposes only.

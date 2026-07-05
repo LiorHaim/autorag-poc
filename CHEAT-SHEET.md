@@ -219,6 +219,20 @@ Wait for all `ds-pipeline-*` pods to reach Running state before proceeding.
 4. Version name: `documents-rag-optimization-pipeline-3.4.0`
 5. Upload the YAML file
 
+### 6.3 Fix AutoRAG Results Dashboard (RHOAI 3.4)
+
+The AutoRAG results page shows "Failed to list templates optimization directory" because the dashboard BFF rejects HTTP S3 endpoints. Fix by changing the DSPA's S3 endpoint to HTTPS:
+
+```bash
+oc edit dspa dspa -n <your-namespace>
+```
+
+Change `objectStorage.externalStorage`:
+- `scheme: http` → `scheme: https`
+- `host: minio.<ns>.svc:9000` → `host: <your-minio-https-route-hostname>`
+
+This makes the dashboard BFF accept the S3 connection and render AutoRAG results natively. Pipeline runs continue to work via the HTTPS route.
+
 ---
 
 ## Phase 7: Prepare Documents and Test Data

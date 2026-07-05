@@ -21,7 +21,7 @@
   },
   {
     "question": "What is the maximum hotel rate for business travel in New York City?",
-    "correct_answers": ["$400 per night", "Up to $400/night in high-cost cities including NYC"],
+    "correct_answers": ["$400 per night", "Up to $400/night in Tier 1 cities including NYC"],
     "correct_answer_document_ids": ["travel-policy.md", "expense-policy.md"]
   },
   {
@@ -98,5 +98,136 @@
     "question": "What is NovaTech's target market percentile for compensation?",
     "correct_answers": ["75th percentile", "NovaTech targets the 75th percentile of market compensation for all roles"],
     "correct_answer_document_ids": ["compensation-philosophy.md"]
+  },
+
+  {
+    "question": "If I'm terminated during my parental leave, does my health insurance continue?",
+    "correct_answers": ["During parental leave, all health, dental, and vision benefits continue. If terminated, COBRA information is sent within 14 days and laid-off employees receive 3 months of COBRA coverage."],
+    "correct_answer_document_ids": ["parental-leave-policy.md", "termination-offboarding.md", "benefits-overview.md"]
+  },
+  {
+    "question": "What is the total annual value of all remote work benefits combined?",
+    "correct_answers": ["$1,400 in the first year ($500 one-time home office stipend + $75/month x 12 = $900), then $900/year ongoing", "The first year includes a $500 one-time stipend plus $900 in monthly stipends ($75 x 12), totaling $1,400"],
+    "correct_answer_document_ids": ["remote-work-policy.md"]
+  },
+  {
+    "question": "Can a new hire who just started take a sabbatical?",
+    "correct_answers": ["No, sabbaticals require 7 or more years of continuous service at NovaTech"],
+    "correct_answer_document_ids": ["pto-policy.md"]
+  },
+  {
+    "question": "How does PTO allocation change as I gain seniority at NovaTech?",
+    "correct_answers": ["PTO increases with tenure: 20 days for 0-2 years, 25 days for 3-5 years, 28 days for 6-10 years, and 32 days for 10+ years"],
+    "correct_answer_document_ids": ["pto-policy.md"]
+  },
+  {
+    "question": "What is the salary range for a Staff Engineer living in Austin?",
+    "correct_answers": ["$175,500 – $220,500", "Austin is a Tier 2 city at 90% of band, so Staff Engineer (L5) range is $175,500 – $220,500"],
+    "correct_answer_document_ids": ["compensation-bands.md", "compensation-philosophy.md"]
+  },
+  {
+    "question": "What travel class can a VP book for a 5-hour domestic flight?",
+    "correct_answers": ["The travel policy says economy class for flights under 6 hours, but VPs and above can book business class regardless of flight duration. The expense policy says economy for flights under 6 hours with business class requiring VP approval."],
+    "correct_answer_document_ids": ["travel-policy.md", "expense-policy.md"]
+  },
+  {
+    "question": "What training must be completed during the first week of onboarding?",
+    "correct_answers": ["Information Security Awareness (45 min), Anti-Harassment Training (60 min), Data Privacy & GDPR (30 min), and Code of Conduct (30 min)"],
+    "correct_answer_document_ids": ["onboarding-guide.md"]
+  },
+  {
+    "question": "Does NovaTech have a policy on cryptocurrency mining on company devices?",
+    "correct_answers": ["Yes, the IT Security Policy prohibits using company systems for cryptocurrency mining, torrenting, or other resource-intensive personal activities"],
+    "correct_answer_document_ids": ["it-security-policy.md"]
+  },
+  {
+    "question": "What are NovaTech's four data classification levels and what type of data falls under each?",
+    "correct_answers": ["Public (marketing materials, blog posts), Internal (announcements, meeting notes, project docs), Confidential (customer data, financial reports, employee records, source code), Restricted (encryption keys, authentication secrets, board materials)"],
+    "correct_answer_document_ids": ["it-security-policy.md"]
+  },
+  {
+    "question": "How much time off do I get as a new parent?",
+    "correct_answers": ["It depends on the type of parent: birth parents receive 16 weeks, non-birth parents receive 8 weeks, and adoptive/foster parents receive 12 weeks of fully paid leave. All require at least 6 months of employment."],
+    "correct_answer_document_ids": ["parental-leave-policy.md"]
+  },
+  {
+    "question": "What happens to my equity grants if I leave NovaTech after 2 years?",
+    "correct_answers": ["New hire equity grants vest over 4 years with a 1-year cliff, so after 2 years approximately 50% of the initial grant would be vested. Refresh grants vest over 3 years with no cliff."],
+    "correct_answer_document_ids": ["compensation-philosophy.md"]
+  },
+  {
+    "question": "Does NovaTech provide pet insurance?",
+    "correct_answers": ["NovaTech's policies do not mention pet insurance. The benefits overview covers health, dental, vision, 401(k), life/disability insurance, and wellness benefits, but pet insurance is not included."],
+    "correct_answer_document_ids": []
+  },
+  {
+    "question": "What is NovaTech's policy on working from another country?",
+    "correct_answers": ["NovaTech's remote work policy does not address working from another country. The policy covers hybrid schedules and fully remote work for employees beyond 50 miles from an office, but international remote work is not covered."],
+    "correct_answer_document_ids": []
+  },
+  {
+    "question": "Does NovaTech offer student loan repayment assistance?",
+    "correct_answers": ["NovaTech's policies do not mention student loan repayment assistance. The company offers tuition reimbursement up to $10,000/year for degree programs, but student loan repayment is not covered."],
+    "correct_answer_document_ids": []
+  },
+  {
+    "question": "What is NovaTech's policy on moonlighting or side projects?",
+    "correct_answers": ["The Code of Conduct requires disclosure of outside employment or consulting that could affect NovaTech duties. The Employee Handbook states that NovaTech does not claim ownership of inventions made entirely on the employee's own time with their own resources, provided they are unrelated to NovaTech's business. However, there is no explicit moonlighting policy."],
+    "correct_answer_document_ids": ["code-of-conduct.md", "employee-handbook.md"]
+  },
+  {
+    "question": "What is the maximum amount NovaTech will reimburse for a degree program?",
+    "correct_answers": ["$10,000 per year", "Up to $10,000/year for degree programs related to their role, requires completion of 90-day probation, 3.0 GPA, and 2-year commitment"],
+    "correct_answer_document_ids": ["learning-development.md"]
+  },
+  {
+    "question": "An employee rated 'Needs Improvement' wants to know what happens next. Walk them through the process.",
+    "correct_answers": ["They are placed on a 60-day Performance Improvement Plan (PIP) with specific measurable goals, weekly check-ins with their manager, and HR involvement. At the end of 60 days, a re-evaluation determines whether they continue employment, the PIP is extended, or they are terminated."],
+    "correct_answer_document_ids": ["performance-review-process.md"]
+  },
+  {
+    "question": "What is the minimum promotion cycle time from Senior Software Engineer to Staff Engineer?",
+    "correct_answers": ["At minimum 12 months, since promotions require a minimum of 12 months in the current role plus a rating of 'Exceeds Expectations' or higher for the last 2 review cycles"],
+    "correct_answer_document_ids": ["performance-review-process.md", "compensation-bands.md"]
+  },
+  {
+    "question": "How many Employee Resource Groups does NovaTech have and what annual budget does each receive?",
+    "correct_answers": ["NovaTech sponsors 8 ERGs, each receiving an annual budget of $10,000 for events and programs"],
+    "correct_answer_document_ids": ["employee-handbook.md"]
+  },
+  {
+    "question": "If an engineer is on-call for a full week and responds to 3 incidents, how much extra compensation do they receive?",
+    "correct_answers": ["$1,100 total ($500 for the week of on-call duty plus $200 per incident x 3 incidents = $600)"],
+    "correct_answer_document_ids": ["engineering-standards.md"]
+  },
+  {
+    "question": "What compliance standards does NovaTech maintain?",
+    "correct_answers": ["SOC 2 Type II (audited annually by Deloitte), ISO 27001 (certified, recertified every 3 years), GDPR (EU operations), CCPA (California customer data), and HIPAA (healthcare customer segment)"],
+    "correct_answer_document_ids": ["it-security-policy.md"]
+  },
+  {
+    "question": "What is the difference between bereavement leave for an immediate family member versus an extended family member?",
+    "correct_answers": ["Immediate family (spouse, child, parent, sibling) receive 5 days of paid leave. Extended family (grandparent, grandchild, in-law, aunt/uncle) receive 3 days of paid leave."],
+    "correct_answer_document_ids": ["pto-policy.md"]
+  },
+  {
+    "question": "What should a remote employee do if they suspect a security breach on their home network?",
+    "correct_answers": ["Report the security incident within 1 hour to security@novatech.internal per the remote work policy. They can also report via Slack #security-incidents or the 24/7 hotline at +1-512-555-0911. Critical incidents have a 15-minute response SLA from the security team."],
+    "correct_answer_document_ids": ["remote-work-policy.md", "it-security-policy.md"]
+  },
+  {
+    "question": "What is the p99 latency target for API endpoints serving user-facing pages?",
+    "correct_answers": ["Less than 200ms", "API endpoints serving user-facing pages must have p99 latency under 200ms"],
+    "correct_answer_document_ids": ["engineering-standards.md"]
+  },
+  {
+    "question": "What is the total cost to the employee for the Gold health plan for individual coverage?",
+    "correct_answers": ["$50 per month ($250 monthly premium minus 80% covered by NovaTech = employee pays 20% = $50/month)", "The employee pays 20% of the $250 monthly premium, which is $50 per month"],
+    "correct_answer_document_ids": ["benefits-overview.md"]
+  },
+  {
+    "question": "How many days of paid volunteer time off does a full-time employee receive?",
+    "correct_answers": ["2 days (16 hours) per year", "All full-time employees receive 16 hours of paid Volunteer Time Off per year"],
+    "correct_answer_document_ids": ["pto-policy.md"]
   }
 ]

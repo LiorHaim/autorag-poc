@@ -6,17 +6,18 @@ Sample documents, test data, and implementation guide for running an AutoRAG opt
 
 ### Documents (`documents/`)
 
-17 Markdown files representing a fictional company's (NovaTech Solutions) internal knowledge base:
+18 Markdown files representing a fictional company's (NovaTech Solutions) internal knowledge base:
 
 - Employee handbook, PTO, remote work, expenses, travel
 - Benefits, compensation, parental leave
 - IT security, data privacy, engineering standards
 - Performance reviews, learning & development
 - Code of conduct, onboarding, workplace safety, termination
+- Compensation bands & leveling guide (table-heavy)
 
 ### Test Data (`test_data.json`)
 
-20 question/answer pairs covering all documents. Format follows the AutoRAG evaluation dataset specification:
+46 question/answer pairs covering all documents, including multi-document questions, unanswerable questions, reasoning/comparison questions, and ambiguous questions. Format follows the AutoRAG evaluation dataset specification:
 
 ```json
 {

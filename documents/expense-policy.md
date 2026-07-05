@@ -7,7 +7,7 @@ All business expenses must be pre-approved by the employee's manager for amounts
 ## Expense Categories and Limits
 
 ### Travel
-- **Airfare**: Economy class for flights under 6 hours; premium economy for flights 6+ hours. Business class requires VP approval.
+- **Airfare**: Economy class for flights under 6 hours; premium economy for flights 6-10 hours. Business class for flights over 10 hours requires VP approval.
 - **Hotels**: Up to $250/night in standard markets; up to $400/night in high-cost cities (NYC, SF, London, Tokyo, Singapore)
 - **Rental Cars**: Mid-size vehicles or below. SUVs require justification.
 - **Mileage**: $0.67 per mile for personal vehicle use on company business

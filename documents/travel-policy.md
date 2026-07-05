@@ -12,8 +12,9 @@ All business travel must be booked through the NovaTech travel portal powered by
 
 - Economy class for flights under 6 hours
 - Premium economy for flights 6-10 hours
-- Business class for flights over 10 hours or when required for medical accommodation
+- Business class for flights over 10 hours, when required for medical accommodation, or for VP-level and above
 - First class is not permitted without CEO approval
+- Employees on international assignments exceeding 30 days may book business class regardless of flight duration
 - Employees may keep frequent flyer miles for personal use
 - Select the lowest reasonable fare within 2 hours of preferred departure time
 

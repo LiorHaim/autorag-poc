@@ -70,7 +70,34 @@ Take the winning pattern's chunking + embedding configuration and index the cust
 
 ### Phase 2: Enable the Responses API (Week 1-2)
 
-Llama Stack already includes a built-in **Responses API** — an agentic layer that orchestrates the full RAG flow in a single API call:
+Llama Stack already includes a built-in **Responses API** — an agentic layer that orchestrates the full RAG flow in a single API call.
+
+#### Shortcut: Use the pipeline-generated `v1_responses_body.json`
+
+AutoRAG's pipeline generates a ready-to-use Responses API request body for each winning pattern at:
+
+```
+s3://pipelines/documents-rag-optimization-pipeline/<run-id>/prepare-responses-api-requests/<artifact-id>/responses_api_artifacts/<PatternX>/v1_responses_body.json
+```
+
+This file contains the exact API call parameters (model, vector store ID, search config, ranking options) pre-configured from the winning pattern. No manual parameter extraction needed — just use it directly:
+
+```bash
+# Download the pre-built request body for the winning pattern
+oc exec <minio-pod> -n <ns> -- mc cat \
+  local/pipelines/documents-rag-optimization-pipeline/<run-id>/prepare-responses-api-requests/<artifact-id>/responses_api_artifacts/Pattern4/v1_responses_body.json \
+  > v1_responses_body.json
+```
+
+Then call the Responses API with it:
+
+```bash
+curl -X POST http://llama-stack-service:8321/v1/responses \
+  -H "Content-Type: application/json" \
+  -d @v1_responses_body.json
+```
+
+#### Manual approach: Build the API call yourself
 
 ```python
 from openai import OpenAI
@@ -86,8 +113,15 @@ response = client.responses.create(
     input="What is the return policy?",
     tools=[{
         "type": "file_search",
-        "vector_store_ids": ["<vector-store-id>"]
-    }]
+        "vector_store_ids": ["<vector-store-id>"],
+        "max_num_results": 10,
+        "ranking_options": {
+            "ranker": "rrf",
+            "k": 60,
+            "alpha": 1.0
+        }
+    }],
+    tool_choice={"type": "file_search"}
 )
 
 print(response.output_text)
@@ -109,8 +143,30 @@ No custom RAG orchestration code needed. The API handles:
 |--------|--------|----------|
 | **Direct Llama Stack Route** | 1-2 days | Internal teams comfortable with API calls |
 | **Custom FastAPI wrapper** | 3-5 days | Adding auth, logging, custom prompts, rate limiting |
-| **Chat UI (Gradio/Streamlit)** | 1 week | Business user demo, helpdesk agents, non-technical users |
+| **Chat UI (Streamlit/Gradio)** | 1 week | Business user demo, helpdesk agents, non-technical users |
 | **Embed in existing app** | Varies | CRM, helpdesk, internal portal integration |
+
+#### Example: Streamlit Chatbot on OpenShift
+
+A minimal production chatbot needs:
+
+| Resource | Purpose |
+|----------|---------|
+| ConfigMap | Stores INFERENCE_MODEL, LLAMA_STACK_HOST, LLAMA_STACK_PORT, VECTOR_STORE_ID |
+| Deployment | Streamlit app container calling Llama Stack Responses API |
+| Service | ClusterIP on port 8501 |
+| Route | TLS edge-terminated for external access |
+
+The app container connects to Llama Stack using the vector store ID from the winning AutoRAG pattern and calls `/v1/responses` with `file_search` tool for every user query. The Responses API handles retrieval + generation internally.
+
+Key environment variables for the chatbot:
+
+```
+INFERENCE_MODEL=vllm-inference-1/llama-32-3b-instruct
+LLAMA_STACK_HOST=lsd-genai-playground-service
+LLAMA_STACK_PORT=8321
+VECTOR_STORE_ID=<from winning pattern's v1_responses_body.json>
+```
 
 **Minimum production wrapper adds:**
 - Authentication (OAuth proxy / API key validation)

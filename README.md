@@ -67,7 +67,7 @@ Complete step-by-step implementation guide covering all 9 phases from zero to a 
 4. Review the leaderboard and download the winning pattern's inference notebook
 5. Test in a Workbench (Jupyter | Data Science | CPU | Python 3.12) with Llama Stack + S3 connections attached
 
-See **[CHEAT-SHEET.md](CHEAT-SHEET.md)** for the full detailed walkthrough.
+See **[CHEAT-SHEET.md](CHEAT-SHEET.md)** for the full detailed walkthrough, and **[potential-next-steps.md](potential-next-steps.md)** for the path from POC to production agent.
 
 ## Model Recommendations
 
